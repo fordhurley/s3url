@@ -1,3 +1,4 @@
+ # -*- coding: utf-8 -*-
 """
 Copyright © 2014 Ford Hurley <ford.hurley@gmail.com>
 This work is free. You can redistribute it and/or modify it under the

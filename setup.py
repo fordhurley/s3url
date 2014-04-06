@@ -1,3 +1,4 @@
+ # -*- coding: utf-8 -*-
 from setuptools import setup
 
 from s3url import __version__
