@@ -11,7 +11,6 @@ setup(
     url='https://github.com/fordhurley/s3url',
     description='A simple command line utility for generating time-sensitive, '
                 'sharable urls for private s3 files',
-    long_description=open('README.md').read(),
     license='WTFPL v2',
 
     scripts=['scripts/s3url'],
