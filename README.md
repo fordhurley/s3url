@@ -43,3 +43,7 @@ Copyright © 2014 Ford Hurley <ford.hurley@gmail.com>
 This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2,
 as published by Sam Hocevar. See the COPYING file for more details.
+
+
+[![PyPI version](http://img.shields.io/pypi/v/s3url.svg)](https://pypi.python.org/pypi/s3url)
+[![PyPI downloads](http://img.shields.io/pypi/dm/s3url.svg)](https://pypi.python.org/pypi/s3url)
