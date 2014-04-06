@@ -31,8 +31,6 @@ them at the command line, use:
 
 ### Installation
 
-Install with [`pip`](http://www.pip-installer.org/):
-
     $ pip install s3url
 
 
