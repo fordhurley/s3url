@@ -1,9 +1,6 @@
  # -*- coding: utf-8 -*-
 from setuptools import setup
 
-from s3url import __version__
-
-
 # From https://gist.github.com/aubricus/9184003
 long_description = ''
 try:
@@ -28,7 +25,7 @@ except:
 
 setup(
     name='s3url',
-    version=__version__,
+    version='0.1.3',
     author='Ford Hurley',
     author_email='ford.hurley@gmail.com',
     url='https://github.com/fordhurley/s3url',
