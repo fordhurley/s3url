@@ -13,6 +13,11 @@ Also accepts `s3://` style URIs:
 
     $ s3url s3://my-bucket/file/to/share.txt
 
+Or `http(s)://` URIs (with the bucket as the subdomain or in the path):
+
+    $ s3url http://s3.amazonaws.com/my-bucket/file/to/share.txt
+    $ s3url https://my-bucket.s3.amazonaws.com/file/to/share.txt
+
 Specify the time until expiration (1 hour and 30 minutes from now):
 
     $ s3url -e 1h30m my-bucket/file/to/share.txt
