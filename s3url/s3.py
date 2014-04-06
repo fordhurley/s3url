@@ -1,0 +1,52 @@
+"""
+Copyright © 2014 Ford Hurley <ford.hurley@gmail.com>
+This work is free. You can redistribute it and/or modify it under the
+terms of the Do What The Fuck You Want To Public License, Version 2,
+as published by Sam Hocevar. See the COPYING file for more details.
+"""
+
+import boto
+
+def parse_keys(keys):
+    """
+    Examples:
+    >>> parse_keys('accesskey:secretkey')
+    ('accesskey', 'secretkey')
+    >>> parse_keys('')
+    (None, None)
+    >>> parse_keys(None)
+    (None, None)
+    >>> parse_keys('accesskey') # Missing secret key
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid AWS key string (see the help)
+    """
+    if keys:
+        keys = keys.split(':')
+        if len(keys) == 2:
+            return tuple(keys)
+        else:
+            raise ValueError('Invalid AWS key string (see the help)')
+    else:
+        return None, None
+
+
+def parse_obj(obj):
+    """
+    >>> parse_obj('bucket/key')
+    ('bucket', 'key')
+    >>> parse_obj('my-bucket/path/to/file.txt')
+    ('my-bucket', 'path/to/file.txt')
+    >>> parse_obj('s3://this_bucket/some/path.txt')
+    ('this_bucket', 'some/path.txt')
+    """
+    obj = obj.lstrip('s3://')
+    return tuple(obj.split('/', 1))
+
+
+def connect(access_key_id, secret_key):
+    return boto.connect_s3(access_key_id, secret_key)
+
+
+def get_s3_url(conn, bucket_name, key_name, expires_in):
+    return conn.generate_url(expires_in=expires_in, method='GET', bucket=bucket_name, key=key_name)

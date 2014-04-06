@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+
+"""
+Generating a sharable url for a private s3 file.
+
+Usage:
+    s3url [options] <s3_object>
+
+Options:
+    -h, --help     Show this screen.
+    -k <aws_keys>  AWS credentials as `YourAccessKeyId:YourSecretAccessKey`.
+                   If omitted, these will be loaded from the environment
+                   variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+    -e <time>      Time until expiration [default: 24h].
+                   Examples: '1h30m', '3d', '42m37s', '5d2h6m10s'
+
+To share `file/to/share.txt` from `my-bucket`, the <s3_object> argument
+should be:
+    my-bucket/file/to/share.txt
+
+Copyright © 2014 Ford Hurley <ford.hurley@gmail.com>
+This work is free. You can redistribute it and/or modify it under the
+terms of the Do What The Fuck You Want To Public License, Version 2,
+as published by Sam Hocevar. See the COPYING file for more details.
+"""
+
+import docopt
+import s3url
+
+
+def main(s3obj, expires_in, keys):
+    expires_in = s3url.time.to_seconds(expires_in)
+    access_key_id, secret_key = s3url.parse_keys(keys)
+    bucket_name, key_name = s3url.parse_obj(s3obj)
+
+    conn = s3url.connect(access_key_id, secret_key)
+    url = s3url.get_s3_url(conn, bucket_name, key_name, expires_in)
+    print url
+
+
+if __name__ == '__main__':
+    args = docopt.docopt(__doc__)
+    main(args['<s3_object>'], args['-e'], args['-k'])
