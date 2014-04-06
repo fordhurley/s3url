@@ -23,7 +23,7 @@ try:
     doc.markdown = open('README.md').read()
     long_description = doc.rst
 except:
-    long_description = open('README.md').read()
+    pass
 
 
 setup(
