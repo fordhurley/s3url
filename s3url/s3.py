@@ -5,7 +5,7 @@ This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2,
 as published by Sam Hocevar. See the COPYING file for more details.
 """
-
+import urlparse
 import boto
 
 def parse_keys(keys):
@@ -40,9 +40,24 @@ def parse_obj(obj):
     ('my-bucket', 'path/to/file.txt')
     >>> parse_obj('s3://this_bucket/some/path.txt')
     ('this_bucket', 'some/path.txt')
+    >>> parse_obj('https://s3.amazonaws.com/bucket/file.txt')
+    ('bucket', 'file.txt')
+    >>> parse_obj('http://the-bucket.s3.amazonaws.com/the/file.txt')
+    ('the-bucket', 'the/file.txt')
     """
     obj = obj.lstrip('s3://')
-    return tuple(obj.split('/', 1))
+    if obj.startswith('http'):
+        url = urlparse.urlparse(obj)
+        if url.netloc == 's3.amazonaws.com':
+            path = url.path[1:]  # remove leading slash
+            bucket, key = path.split('/', 1)
+        else:
+            # bucket.s3.amazonaws.com form
+            bucket = url.netloc.split('.', 1)[0]
+            key = url.path[1:]
+    else:
+        bucket, key = obj.split('/', 1)
+    return bucket, key
 
 
 def connect(access_key_id, secret_key):
