@@ -6,7 +6,7 @@ terms of the Do What The Fuck You Want To Public License, Version 2,
 as published by Sam Hocevar. See the COPYING file for more details.
 """
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 from s3url.s3 import parse_keys, parse_obj, connect, get_s3_url
 import s3url.time
