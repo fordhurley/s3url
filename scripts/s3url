@@ -23,17 +23,36 @@ This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2,
 as published by Sam Hocevar. See the COPYING file for more details.
 """
-
+import sys
 import docopt
 import s3url
 
 
+def error(message, exception):
+    sys.stderr.write(message)
+    sys.stderr.write('--> %r\n' % exception)
+    sys.stderr.write('See the --help\n')
+    sys.exit(1)
+
+
 def main(s3obj, expires_in, keys):
-    expires_in = s3url.time.to_seconds(expires_in)
-    access_key_id, secret_key = s3url.parse_keys(keys)
-    bucket_name, key_name = s3url.parse_obj(s3obj)
+    try:
+        expires_in = s3url.time.to_seconds(expires_in)
+    except ValueError as e:
+        error('Invalid expiration time argument (%s)\n' % expires_in, e)
+
+    try:
+        access_key_id, secret_key = s3url.parse_keys(keys)
+    except ValueError as e:
+        error('Invalid credentials argument\n', e)
+
+    try:
+        bucket_name, key_name = s3url.parse_obj(s3obj)
+    except Exception as e:
+        error('Invalid object argument (%s)\n' % s3obj, e)
 
     conn = s3url.connect(access_key_id, secret_key)
+
     url = s3url.get_s3_url(conn, bucket_name, key_name, expires_in)
     print url
 

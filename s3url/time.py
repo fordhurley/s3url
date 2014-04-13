@@ -29,6 +29,10 @@ def to_seconds(string):
     5400
     >>> to_seconds('3d')
     259200
+    >>> to_seconds('42x')
+    Traceback (most recent call last):
+     ...
+    ValueError
     """
 
     units = {
@@ -40,7 +44,7 @@ def to_seconds(string):
 
     match = re.search(r'(?:(?P<d>\d+)d)?(?:(?P<h>\d+)h)?(?:(?P<m>\d+)m)?(?:(?P<s>\d+)s)?', string)
 
-    if match is None:
+    if not match or not any(match.groups()):
         raise ValueError
 
     total = 0

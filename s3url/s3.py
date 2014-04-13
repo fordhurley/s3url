@@ -20,14 +20,11 @@ def parse_keys(keys):
     >>> parse_keys('accesskey') # Missing secret key
     Traceback (most recent call last):
         ...
-    ValueError: Invalid AWS key string (see the help)
+    ValueError: need more than 1 value to unpack
     """
     if keys:
-        keys = keys.split(':')
-        if len(keys) == 2:
-            return tuple(keys)
-        else:
-            raise ValueError('Invalid AWS key string (see the help)')
+        access_id, secret_key = keys.split(':')
+        return access_id, secret_key
     else:
         return None, None
 
