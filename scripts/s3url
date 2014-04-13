@@ -23,7 +23,9 @@ This work is free. You can redistribute it and/or modify it under the
 terms of the Do What The Fuck You Want To Public License, Version 2,
 as published by Sam Hocevar. See the COPYING file for more details.
 """
+from __future__ import print_function
 import sys
+
 import docopt
 import s3url
 
@@ -54,7 +56,8 @@ def main(s3obj, expires_in, keys):
     conn = s3url.connect(access_key_id, secret_key)
 
     url = s3url.get_s3_url(conn, bucket_name, key_name, expires_in)
-    print url
+
+    print(url)
 
 
 if __name__ == '__main__':
