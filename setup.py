@@ -36,6 +36,11 @@ setup(
                 'sharable urls for private s3 files',
     long_description=long_description,
     license='WTFPL v2',
+    classifiers=[
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Environment :: Console'
+    ],
 
     scripts=['scripts/s3url'],
     packages=['s3url'],
