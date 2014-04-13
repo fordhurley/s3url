@@ -22,6 +22,9 @@ try:
 except:
     pass
 
+# This is fragile. The file must be carefully formatted.
+requirements = [line.strip() for line in open('requirements.txt').readlines()]
+requirements = [r for r in requirements if r and not r.startswith('#')]
 
 setup(
     name='s3url',
@@ -36,9 +39,6 @@ setup(
 
     scripts=['scripts/s3url'],
     packages=['s3url'],
-    install_requires=[
-        'boto>=2.17',
-        'docopt>=0.6.1'
-    ],
+    install_requires=requirements,
     tests_require=['nose>=1.0']
 )
