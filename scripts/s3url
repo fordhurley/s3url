@@ -7,7 +7,8 @@ Usage:
     s3url [options] <s3_object>
 
 Options:
-    -h, --help     Show this screen.
+    -h, --help     Show this screen and exit.
+    --version      Show the version and exit.
     -k <aws_keys>  AWS credentials as `YourAccessKeyId:YourSecretAccessKey`.
                    If omitted, these will be loaded from the environment
                    variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
@@ -61,5 +62,5 @@ def main(s3obj, expires_in, keys):
 
 
 if __name__ == '__main__':
-    args = docopt.docopt(__doc__)
+    args = docopt.docopt(__doc__, version=s3url.__version__)
     main(args['<s3_object>'], args['-e'], args['-k'])

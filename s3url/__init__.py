@@ -7,3 +7,5 @@ as published by Sam Hocevar. See the COPYING file for more details.
 """
 from s3url.s3 import parse_keys, parse_obj, connect, get_s3_url
 import s3url.time
+
+from s3url.version import __version__

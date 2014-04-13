@@ -26,9 +26,12 @@ except:
 requirements = [line.strip() for line in open('requirements.txt').readlines()]
 requirements = [r for r in requirements if r and not r.startswith('#')]
 
+# Pull in __version__ from the package
+execfile('s3url/version.py')
+
 setup(
     name='s3url',
-    version='0.1.5dev',
+    version=__version__,
     author='Ford Hurley',
     author_email='ford.hurley@gmail.com',
     url='https://github.com/fordhurley/s3url',
