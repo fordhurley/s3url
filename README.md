@@ -43,6 +43,6 @@ terms of the Do What The Fuck You Want To Public License, Version 2,
 as published by Sam Hocevar. See the COPYING file for more details.
 
 
-[![PyPI version](http://img.shields.io/pypi/v/s3url.svg)](https://pypi.python.org/pypi/s3url)
+[![PyPI version](http://img.shields.io/pypi/v/s3url.svg?style=flat)](https://pypi.python.org/pypi/s3url)
 
 ![Build status](https://www.codeship.io/projects/eafe1020-a532-0131-51d0-3e9695abd440/status)
